@@ -14,9 +14,3 @@ public class RoleGetDTO {
     private String lastName;
     private String nicNo;
 }
-
-//private String organization;
-//    private String firstName;
-//    private String lastName;
-//    private String nicNo;
-//    private String roleType;

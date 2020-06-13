@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -15,4 +17,7 @@ public class RolePostDTO {
     private String lastName;
     private String nicNo;
     private String roleType;
+    private Date createdDate;
+    private Date lastModifiedDate;
+
 }

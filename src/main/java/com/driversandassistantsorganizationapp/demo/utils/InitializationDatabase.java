@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Date;
 
 @Component
 public class InitializationDatabase {
@@ -18,11 +19,16 @@ public class InitializationDatabase {
         roleRepositorie.deleteAll();
 // drivers
         Role role = new Role();
+        Date date = new Date();
+
+
         role.setOrganization("lamborghini");
         role.setFirstName("Dilanth");
         role.setLastName("malagamuwa");
         role.setNicNo("632401100v");
         role.setRoleType("driver");
+        role.setCreatedDate(date);
+        role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
@@ -31,6 +37,8 @@ public class InitializationDatabase {
         role.setLastName("malagamuwa");
         role.setNicNo("632401200v");
         role.setRoleType("driver");
+        role.setCreatedDate(date);
+        role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
@@ -39,6 +47,8 @@ public class InitializationDatabase {
         role.setLastName("malagamuwa");
         role.setNicNo("632401300v");
         role.setRoleType("driver");
+        role.setCreatedDate(date);
+        role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
@@ -47,6 +57,8 @@ public class InitializationDatabase {
         role.setLastName("senna");
         role.setNicNo("782401400v");
         role.setRoleType("driver");
+        role.setCreatedDate(date);
+        role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
@@ -55,6 +67,8 @@ public class InitializationDatabase {
         role.setLastName("schumacher");
         role.setNicNo("702401500v");
         role.setRoleType("driver");
+        role.setCreatedDate(date);
+        role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 // assistant
         role = new Role();
@@ -63,6 +77,8 @@ public class InitializationDatabase {
         role.setLastName("hamilton");
         role.setNicNo("502401600v");
         role.setRoleType("assistant");
+        role.setCreatedDate(date);
+        role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
@@ -71,6 +87,8 @@ public class InitializationDatabase {
         role.setLastName("malagamuwa");
         role.setNicNo("702401700v");
         role.setRoleType("assistant");
+        role.setCreatedDate(date);
+        role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
@@ -79,6 +97,8 @@ public class InitializationDatabase {
         role.setLastName("mask");
         role.setNicNo("902401800v");
         role.setRoleType("assistant");
+        role.setCreatedDate(date);
+        role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
@@ -87,6 +107,8 @@ public class InitializationDatabase {
         role.setLastName("barack");
         role.setNicNo("402401900v");
         role.setRoleType("assistant");
+        role.setCreatedDate(date);
+        role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
@@ -95,6 +117,8 @@ public class InitializationDatabase {
         role.setLastName("gamage");
         role.setNicNo("302401100v");
         role.setRoleType("assistant");
+        role.setCreatedDate(date);
+        role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
     }
