@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @CrossOrigin
 @RestController
@@ -51,6 +52,21 @@ public class RoleController {
         try {
             // rolePostDTO to role
             Role role = (Role) EntityDtoMapping.convertDtoToEntity(rolePostDTO, Role.class);
+
+            //role validate nic no
+            if(!rolePostDTO.getNicNo().isEmpty()) {
+                boolean isMatched = Pattern.matches("^([0-9]{9})+[vV]$|^[0-9]{12}$",rolePostDTO.getNicNo());
+                if(!isMatched) {
+                    return CustomResponse.badRequestResponse("invalid nic format");
+                }
+            }
+            //role validate role type
+            if(!rolePostDTO.getRoleType().isEmpty()){
+                if(!rolePostDTO.getRoleType().toLowerCase().equals("driver") && !rolePostDTO.getRoleType().toLowerCase().equals("assistant") ) {
+                    return CustomResponse.badRequestResponse("role type mismatch");
+                }
+            }
+
             // Instantiate a Date
             Date date = new Date();
             role.setCreatedDate(date);
@@ -68,9 +84,9 @@ public class RoleController {
     public ResponseEntity<Object> deleteRole(@PathVariable String nicNo) {
         try {
             roleService.deleteRole(nicNo);
-            return CustomResponse.successResponse(null);
+            return CustomResponse.successResponse("deleted");
         } catch (Exception e) {
-            return CustomResponse.badRequestResponse(e.getMessage());
+            return CustomResponse.badRequestResponse(null);
         }
     }
 
@@ -78,6 +94,19 @@ public class RoleController {
     public ResponseEntity<Object> updateRole(@PathVariable String nicNo, @RequestBody RolePutDTO rolePutDTO) {
         try {
             Role role = (Role) EntityDtoMapping.convertEntityToDto(rolePutDTO, Role.class);
+            //role validate nic no
+            if(!rolePutDTO.getNicNo().isEmpty()) {
+                boolean isMatched = Pattern.matches("^([0-9]{9})+[vV]$|^[0-9]{12}$",rolePutDTO.getNicNo());
+                if(!isMatched) {
+                    return CustomResponse.badRequestResponse("invalid nic format");
+                }
+            }
+            //role validate role type
+            if(!rolePutDTO.getRoleType().isEmpty()){
+                if(!rolePutDTO.getRoleType().toLowerCase().equals("driver") && !rolePutDTO.getRoleType().toLowerCase().equals("assistant") ) {
+                    return CustomResponse.badRequestResponse("role type mismatch");
+                }
+            }
             Role roleByNic = roleService.getRoleByNic(nicNo);
             role.setCreatedDate(roleByNic.getCreatedDate());
             role.setId(roleByNic.getId());
@@ -89,7 +118,7 @@ public class RoleController {
             return CustomResponse.successResponse(roleGetDTO);
 
         } catch (Exception e) {
-            return CustomResponse.badRequestResponse(e.getMessage());
+            return CustomResponse.badRequestResponse(null);
         }
     }
 

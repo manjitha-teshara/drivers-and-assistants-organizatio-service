@@ -46,4 +46,8 @@ public class RoleService {
         return roleRepositorie.getByOrganizationAndRoleType(organization, roleType);
     }
 
+    public boolean findByNic(String nicNo) {
+        Role role = roleRepositorie.getByNic(nicNo);
+        return roleRepositorie.existsById(role.getId());
+    }
 }
