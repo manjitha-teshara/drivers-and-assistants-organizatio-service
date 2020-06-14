@@ -37,8 +37,14 @@ public class RoleService {
     }
 
     //get role by nic no
-    public Role getRoleByNic(String nic) {
-        return roleRepositorie.getByNic(nic);
+    public Role getRoleByNic(String nicNo) {
+        List<Role> roleList = roleRepositorie.getByNic(nicNo);
+        if(roleList.isEmpty()){
+            return new Role();
+        }
+        else {
+            return roleRepositorie.getByNic(nicNo).get(0);
+        }
     }
 
     //get role by organization and role type
@@ -46,8 +52,10 @@ public class RoleService {
         return roleRepositorie.getByOrganizationAndRoleType(organization, roleType);
     }
 
+    //check avaliability by nic no
     public boolean findByNic(String nicNo) {
-        Role role = roleRepositorie.getByNic(nicNo);
-        return roleRepositorie.existsById(role.getId());
+        List<Role> roleList = roleRepositorie.getByNic(nicNo);
+        return !roleList.isEmpty();
+
     }
 }

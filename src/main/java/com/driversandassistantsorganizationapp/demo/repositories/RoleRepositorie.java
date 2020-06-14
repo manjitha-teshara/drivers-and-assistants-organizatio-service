@@ -10,10 +10,10 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "role", path = "role")
 
 public interface RoleRepositorie extends MongoRepository<Role, String> {
-    @Query(value = "{ 'nicNo': ?0 }") //, fields = "{ 'firstName' : 1,'lastName' : 1,'nicNo' : 1}"
-    Role getByNic(String nic);
+    @Query(value = "{ 'nicNo': ?0 }")
+    List<Role> getByNic(String nic);
 
-    @Query(value = "{ $and: [{'organization': ?0}, {'roleType': ?1 }] }")//, fields = "{ 'firstName' : 1,'lastName' : 1,'nicNo' : 1}")
+    @Query(value = "{ $and: [{'organization': ?0}, {'roleType': ?1 }] }")
     List<Role> getByOrganizationAndRoleType(String organization, String roleType);
 
     @Query(value = "{'nicNo': ?0}", delete = true)

@@ -55,6 +55,9 @@ public class RoleController {
 
             //role validate nic no
             if(!rolePostDTO.getNicNo().isEmpty()) {
+                if(roleService.findByNic(rolePostDTO.getNicNo())){
+                    return CustomResponse.badRequestResponse("role exist for nic no");
+                }
                 boolean isMatched = Pattern.matches("^([0-9]{9})+[vV]$|^[0-9]{12}$",rolePostDTO.getNicNo());
                 if(!isMatched) {
                     return CustomResponse.badRequestResponse("invalid nic format");
