@@ -11,6 +11,9 @@ import java.util.Date;
 @Component
 public class InitializationDatabase {
 
+    private static final  String ORG1 = "lamborghini";
+    private static final String DRIVER = "driver";
+    private static final String ASSISTANT = "assistant";
     @Autowired
     private RoleRepositorie roleRepositorie;
 
@@ -22,31 +25,31 @@ public class InitializationDatabase {
         Date date = new Date();
 
 
-        role.setOrganization("lamborghini");
-        role.setFirstName("Dilanth");
-        role.setLastName("malagamuwa");
+        role.setOrganization(ORG1);
+        role.setFirstName("dilanth");
+        role.setLastName("sugathapala");
         role.setNicNo("632401100v");
-        role.setRoleType("driver");
+        role.setRoleType(DRIVER);
         role.setCreatedDate(date);
         role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
-        role.setOrganization("lamborghini");
-        role.setFirstName("Dilanth");
-        role.setLastName("malagamuwa");
+        role.setOrganization(ORG1);
+        role.setFirstName("dilanka");
+        role.setLastName("gamlath");
         role.setNicNo("632401200v");
-        role.setRoleType("driver");
+        role.setRoleType(DRIVER);
         role.setCreatedDate(date);
         role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
-        role.setOrganization("lamborghini");
+        role.setOrganization(ORG1);
         role.setFirstName("dilanth");
         role.setLastName("malagamuwa");
         role.setNicNo("632401300v");
-        role.setRoleType("driver");
+        role.setRoleType(DRIVER);
         role.setCreatedDate(date);
         role.setLastModifiedDate(date);
         roleRepositorie.save(role);
@@ -56,17 +59,17 @@ public class InitializationDatabase {
         role.setFirstName("ayrton");
         role.setLastName("senna");
         role.setNicNo("782401400v");
-        role.setRoleType("driver");
+        role.setRoleType(DRIVER);
         role.setCreatedDate(date);
         role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
-        role.setOrganization("lamborghini");
+        role.setOrganization(ORG1);
         role.setFirstName("michael");
         role.setLastName("schumacher");
         role.setNicNo("702401500v");
-        role.setRoleType("driver");
+        role.setRoleType(DRIVER);
         role.setCreatedDate(date);
         role.setLastModifiedDate(date);
         roleRepositorie.save(role);
@@ -76,27 +79,27 @@ public class InitializationDatabase {
         role.setFirstName("taye");
         role.setLastName("hamilton");
         role.setNicNo("502401600v");
-        role.setRoleType("assistant");
+        role.setRoleType(ASSISTANT);
         role.setCreatedDate(date);
         role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
-        role.setOrganization("lamborghini");
+        role.setOrganization(ORG1);
         role.setFirstName("kumara");
         role.setLastName("malagamuwa");
         role.setNicNo("702401700v");
-        role.setRoleType("assistant");
+        role.setRoleType(ASSISTANT);
         role.setCreatedDate(date);
         role.setLastModifiedDate(date);
         roleRepositorie.save(role);
 
         role = new Role();
-        role.setOrganization("lamborghini");
+        role.setOrganization(ORG1);
         role.setFirstName("michael");
         role.setLastName("mask");
         role.setNicNo("902401800v");
-        role.setRoleType("assistant");
+        role.setRoleType(ASSISTANT);
         role.setCreatedDate(date);
         role.setLastModifiedDate(date);
         roleRepositorie.save(role);
@@ -106,7 +109,7 @@ public class InitializationDatabase {
         role.setFirstName("lewis");
         role.setLastName("barack");
         role.setNicNo("402401900v");
-        role.setRoleType("assistant");
+        role.setRoleType(ASSISTANT);
         role.setCreatedDate(date);
         role.setLastModifiedDate(date);
         roleRepositorie.save(role);
@@ -116,7 +119,7 @@ public class InitializationDatabase {
         role.setFirstName("sadun");
         role.setLastName("gamage");
         role.setNicNo("302401100v");
-        role.setRoleType("assistant");
+        role.setRoleType(ASSISTANT);
         role.setCreatedDate(date);
         role.setLastModifiedDate(date);
         roleRepositorie.save(role);

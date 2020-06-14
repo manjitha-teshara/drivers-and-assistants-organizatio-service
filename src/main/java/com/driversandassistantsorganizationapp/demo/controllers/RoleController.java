@@ -23,14 +23,16 @@ public class RoleController {
     @Autowired
     private final RoleService roleService;
 
+    List<RoleGetDTO> roleGetDTOList;
+
     @Autowired
     public RoleController(RoleService roleService) {
         this.roleService = roleService;
     }
 
     @GetMapping("/all")
-    public ResponseEntity getAllRoles() {
-        try{
+    public ResponseEntity<Object> getAllRoles() {
+        try {
             List<Role> roleList = roleService.getAllRoles();
             List<RoleGetDTO> roleGetDTOList = new ArrayList<>();
             roleList.forEach(role -> {
@@ -45,20 +47,17 @@ public class RoleController {
 
     @PostMapping(path = "/add")
     @ResponseBody
-    public ResponseEntity addRole(@RequestBody RolePostDTO rolePostDTO) {
+    public ResponseEntity<Object> addRole(@RequestBody RolePostDTO rolePostDTO) {
         try {
-            if(roleService.findByNicNo(rolePostDTO.getNicNo())){
-                return CustomResponse.notFoundResponse("role exist for given nic no");
-            }
             // rolePostDTO to role
             Role role = (Role) EntityDtoMapping.convertDtoToEntity(rolePostDTO, Role.class);
-            // Instantiate a Date object
+            // Instantiate a Date
             Date date = new Date();
             role.setCreatedDate(date);
             role.setLastModifiedDate(date);
             Role roleStored = roleService.addOrUpdate(role);
             //convert role to dto
-            RoleGetDTO roleGetDTO = (RoleGetDTO) EntityDtoMapping.convertDtoToEntity(role, RoleGetDTO.class);
+            RoleGetDTO roleGetDTO = (RoleGetDTO) EntityDtoMapping.convertDtoToEntity(roleStored, RoleGetDTO.class);
             return CustomResponse.successResponse(roleGetDTO);
         } catch (Exception e) {
             return CustomResponse.badRequestResponse(e.getMessage());
@@ -66,11 +65,8 @@ public class RoleController {
     }
 
     @DeleteMapping("/delete/{nicNo}")
-    public ResponseEntity deleteRole(@PathVariable String nicNo) {
+    public ResponseEntity<Object> deleteRole(@PathVariable String nicNo) {
         try {
-            if(!roleService.findByNicNo(nicNo)){
-                return CustomResponse.notFoundResponse("role not found for given nic no");
-            }
             roleService.deleteRole(nicNo);
             return CustomResponse.successResponse(null);
         } catch (Exception e) {
@@ -79,38 +75,27 @@ public class RoleController {
     }
 
     @PutMapping("/update/{nicNo}")
-    public ResponseEntity updateRole(@PathVariable String nicNo, @RequestBody RolePutDTO rolePutDTO){
+    public ResponseEntity<Object> updateRole(@PathVariable String nicNo, @RequestBody RolePutDTO rolePutDTO) {
         try {
-            if(!roleService.findByNicNo(nicNo)){
-                return CustomResponse.notFoundResponse("role not found for given nic no");
-            }
             Role role = (Role) EntityDtoMapping.convertEntityToDto(rolePutDTO, Role.class);
             Role roleByNic = roleService.getRoleByNic(nicNo);
-            if(role.getFirstName().isEmpty()) {
-                role.setFirstName(roleByNic.getFirstName());
-            }
-            if(role.getLastName().isEmpty()) {
-                role.setLastName(roleByNic.getLastName());
-            }
-            if(role.getRoleType().isEmpty()) {
-                role.setRoleType(roleByNic.getRoleType());
-            }
-            role.setNicNo(roleByNic.getNicNo());
             role.setCreatedDate(roleByNic.getCreatedDate());
+            role.setId(roleByNic.getId());
             // Instantiate a Date object
             Date date = new Date();
             role.setLastModifiedDate(date);
             Role roleUpdated = roleService.addOrUpdate(role);
             RoleGetDTO roleGetDTO = (RoleGetDTO) EntityDtoMapping.convertDtoToEntity(roleUpdated, RoleGetDTO.class);
             return CustomResponse.successResponse(roleGetDTO);
-        }catch (Exception e){
+
+        } catch (Exception e) {
             return CustomResponse.badRequestResponse(e.getMessage());
         }
     }
 
     @GetMapping("/get-role/{nicNo}")
-    public ResponseEntity getRoleByNic(@PathVariable String nicNo) {
-        try{
+    public ResponseEntity<Object> getRoleByNic(@PathVariable String nicNo) {
+        try {
             Role role = roleService.getRoleByNic(nicNo);
             RoleGetDTO roleGetDTO = (RoleGetDTO) EntityDtoMapping.convertDtoToEntity(role, RoleGetDTO.class);
             return CustomResponse.successResponse(roleGetDTO);
@@ -120,9 +105,9 @@ public class RoleController {
     }
 
     @GetMapping("/get-role/{organization}/{roleType}")
-    public ResponseEntity GetByOrganizationAndRoleType(@PathVariable String organization,@PathVariable String roleType) {
-        try{
-            List<Role> roleList = roleService.findByOrganizationAndRoleType(organization,roleType);
+    public ResponseEntity<Object> getByOrganizationAndRoleType(@PathVariable String organization, @PathVariable String roleType) {
+        try {
+            List<Role> roleList = roleService.findByOrganizationAndRoleType(organization, roleType);
             List<RoleGetDTO> roleGetDTOList = new ArrayList<>();
             roleList.forEach(role -> {
                 RoleGetDTO roleGetDTO = (RoleGetDTO) EntityDtoMapping.convertDtoToEntity(role, RoleGetDTO.class);

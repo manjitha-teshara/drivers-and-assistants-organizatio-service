@@ -12,9 +12,12 @@ import java.util.List;
 @Service
 public class RoleService {
     private RoleRepositorie roleRepositorie;
+
     @Contract(pure = true)
     @Autowired
-    public RoleService(RoleRepositorie roleRepositorie) { this.roleRepositorie = roleRepositorie;}
+    public RoleService(RoleRepositorie roleRepositorie) {
+        this.roleRepositorie = roleRepositorie;
+    }
 
     //get all roles
     public List<Role> getAllRoles() {
@@ -25,12 +28,7 @@ public class RoleService {
 
     //add or update role
     public Role addOrUpdate(Role role) {
-        return roleRepositorie.save(role);
-    }
-
-    //check the availability by nic no
-    public boolean findByNicNo(String nicNo) {
-        return roleRepositorie.existsById(nicNo);
+               return roleRepositorie.save(role);
     }
 
     //delete a role by nic no
@@ -44,8 +42,8 @@ public class RoleService {
     }
 
     //get role by organization and role type
-    public List<Role> findByOrganizationAndRoleType(String organization, String roleType){
-      return roleRepositorie.getByOrganizationAndRoleType(organization,roleType);
+    public List<Role> findByOrganizationAndRoleType(String organization, String roleType) {
+        return roleRepositorie.getByOrganizationAndRoleType(organization, roleType);
     }
 
 }
