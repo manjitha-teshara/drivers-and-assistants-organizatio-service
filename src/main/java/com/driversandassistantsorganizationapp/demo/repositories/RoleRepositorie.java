@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface RoleRepositorie extends MongoRepository<Role, String> {
     @Query(value = "{ 'nicNo': ?0 }")
-    List<Role> getByNic(String nic);
+    Role getByNic(String nic);
 
     @Query(value = "{ $and: [{'organization': ?0}, {'roleType': ?1 }] }")
     List<Role> getByOrganizationAndRoleType(String organization, String roleType);
